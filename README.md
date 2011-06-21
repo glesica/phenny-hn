@@ -1,8 +1,8 @@
-###### Phenny-HN
+# Phenny-HN
 
 This is a Phenny IRC bot module for sharing the most popular link on the Hacker News front page in a channel.
 
-##### Setup
+## Setup
 
 Install the module, hn.py, in your Phenny instance. It will do the rest. There are some configuration constants near the top of the file you can set.
 
@@ -10,6 +10,6 @@ Install the module, hn.py, in your Phenny instance. It will do the rest. There a
 
 `MAX_HISTORY_SIZE` - The number of previous links the bot will remember, and thus not share again.
 
-##### Commands
+## Commands
 
 If you tell the bot to "repeat hn" it will re-share the last link.
