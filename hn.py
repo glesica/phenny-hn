@@ -7,8 +7,6 @@ from datetime import datetime as dt
 
 
 
-LOG_PATH = '.'
-LOG_NAME = '.hn-log'
 REFRESH_SECONDS = 60 * 15 # 15 minutes
 MAX_HISTORY_SIZE = 10
 
@@ -18,8 +16,6 @@ last_urls = []
 
 
 def hn(ph, data):
-    global LOG_PATH
-    global LOG_NAME
     global REFRESH_SECONDS
     global MAX_HISTORY_SIZE
     global last_run
