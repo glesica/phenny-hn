@@ -2,7 +2,7 @@
 Phenny module to make Phenny fetch the highest scoring HN article and post 
 it for discussion.
 '''
-import os, urllib, json
+import os, urllib, urllib2, json
 from datetime import datetime as dt
 
 
@@ -13,6 +13,24 @@ MAX_HISTORY_SIZE = 10
 last_run = dt(1000,1,1,0,0,0) # Long time ago
 last_urls = []
 
+# makes an URL tiny using http://goo.gl
+# defaults to original URL if something fails
+# usage: print Tiny("http://youporn.com").url
+class Tiny:
+    url = "ciao"
+    def __init__(self, url):
+        j = self.gettiny(url)
+        try:
+            self.url = json.loads(j)['short_url']
+        except ValueError:
+            self.url = url;
+    
+    def gettiny(self, url):
+        data = urllib.urlencode({"url": url})
+        req = urllib2.Request("http://goo.gl/api/shorten", data)
+        response = urllib2.urlopen(req)
+        content = response.read()
+        return content
 
 
 def hn(ph, data):
@@ -49,7 +67,7 @@ def hn(ph, data):
             if len(last_urls) > MAX_HISTORY_SIZE:
                 last_urls.pop()
             
-            ph.say('Hey everyone, we should talk about this: %s' % url)
+            ph.say('Hey everyone, we should talk about this: %s' % Tiny(url).url)
             
     except Exception as e:
         # Because Phenny blasts exceptions into the channel
